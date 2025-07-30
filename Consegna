@@ -1,34 +1,106 @@
-data.search da mappare
-Stesso componente con prop diversa?
+Navigazione per Neftlix React
 
-http://www.omdbapi.com/?i=tt3896198&apikey=78413715 API
+In questo esercizio applicherai le nuove conoscenze riguardo il react-router-dom alla tua app Netflix.
 
-Netflix in React
+Ricorda di installare il pacchetto npm con npm i react-router-dom
 
-Oggi la tua sfida riguarderà il refactoring della homepage del tuo progetto Netflix in JavaScript (U2-W2-D5). Dovrà diventare un'applicazione React con fetch dei dati da "The Open Movie Database".
+<!-- Crea una Route per un componente TVShows. Una semplice rotta statica, senza parametri. FATTO -->
 
-Passaggi suggeriti:
+Crea una Route parametrica per montare un componente MovieDetails. Dovrà permettere di ricevere un parametro id dalla URL. Es. /movie-details/:movieIdCrea il componente MovieDetails per visualizzare i dettagli e i commenti del singolo film. Queste informazioni dovranno essere ottenute da delle fetch ogni qualvolta il componente MovieDetails verrà montato; avrai bisogno di prelevare il movieId dall'URL (per recuperare sia i dettagli del film sia i suoi commenti sarà necessario effettuare due fetch: una a omdbAPI e una alle nostre API interne)Rendete cliccabile ogni film visualizzato nella vostra pagina: dovrete navigare alla sua pagina di dettaglio, sfruttando la rotta parametrica creata sopra. Inserisci l'id del film nell'URL.
 
-Crea una nuova react-app con Vite, e a partire dal progetto Netflix fornito comincia a trasportare l'interfaccia della home page tramite componenti React (navbar, footer, etc.)Crea, usando componenti, diverse "gallerie" per i film (almeno 3 gallerie con 3 film saga che ti piacciono, esempio: Harry Potter, Lord of the Rings ecc.)Queste gallerie dovranno fare il fetch dei dati da Omdb APIs al caricamento del componente[EXTRA] Aggiungi dei loader e gestione errori nella pagina principale[EXTRA] una volta finito il resto, fai il refactor anche delle altre pagine: account, settings.
+EXTRA
 
-📄 API Docs:
+Cambia il comportamento della SearchBar: se l'utente è sulla pagina TVShows, il placeholder dovrà diventare: "Cerca Serie TV..."Se non l'hai già fatto, migliora l'esperienza utente aggiungendo loaders e gestione errori
+
+📃 API Docs:
+
+OMDB
 
 Registrati su http://www.omdbapi.com/
 
-Una volta registrato, riceverai un'email con la API Key.
+Una volta fatto riceverai un'email con la tua API Key.
 
-L'endpoint su cui effettuare la ricerca dovrebbe somigliare a questo:
+L'endpoint per ottenere i dettagli di un film sarà così costituito:
 
-http://www.omdbapi.com/?apikey=metti-qui-la-api-key&s=Star Wars
+http://www.omdbapi.com/?apikey=[PUT_YOUR_API_KEY_HERE]&i=tt0241527
 
-Ogni ricerca ritornerà un'oggetto simile a questo:
+La chiamata ritorna un oggetto simile a questo:
 
-{  "Search": [    {      "Title": "Harry Potter and the Deathly Hallows: Part 2",      "Year": "2011",      "imdbID": "tt1201607",      "Type": "movie",      "Poster": "https://bit.ly/3sufYok"    },    {      "Title": "Harry Potter and the Sorcerer's Stone",      "Year": "2001",      "imdbID": "tt0241527",      "Type": "movie",      "Poster": "https://bit.ly/3tTtx0H"    },    {      "Title": "Harry Potter and the Chamber of Secrets",      "Year": "2002",      "imdbID": "tt0295297",      "Type": "movie",      "Poster": "https://bit.ly/31gVxzb"    },    {      "Title": "Harry Potter and the Prisoner of Azkaban",      "Year": "2004",      "imdbID": "tt0304141",      "Type": "movie",      "Poster": "https://bit.ly/2QzHt1n"    },  ],  "totalResults": "80",  "Response": "True"}
+{
+"Title": "Harry Potter and the Sorcerer's Stone",
+"Year": "2001",
+"Rated": "PG",
+"Released": "16 Nov 2001",
+"Runtime": "152 min",
+"Genre": "Adventure, Family, Fantasy",
+"Director": "Chris Columbus",
+"Writer": "J.K. Rowling (novel), Steve Kloves (screenplay)",
+"Actors": "Richard Harris, Maggie Smith, Robbie Coltrane, Saunders Triplets",
+"Plot": "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world.",
+"Language": "English",
+"Country": "UK, USA",
+"Awards": "Nominated for 3 Oscars. Another 17 wins & 62 nominations.",
+"Poster": "https://m.media-amazon.com/images/M/MV5BNjQ3NWNlNmQtMTE5ZS00MDdmLTlkZjUtZTBlM2UxMGFiMTU3XkEyXkFqcGdeQXVyNjUwNzk3NDc@._V1_SX300.jpg",
+"Ratings": [
+{
+"Source": "Internet Movie Database",
+"Value": "7.6/10"
+},
+{
+"Source": "Rotten Tomatoes",
+"Value": "81%"
+},
+{
+"Source": "Metacritic",
+"Value": "64/100"
+}
+],
+"Metascore": "64",
+"imdbRating": "7.6",
+"imdbVotes": "572,463",
+"imdbID": "tt0241527",
+"Type": "movie",
+"DVD": "28 May 2002",
+"BoxOffice": "$317,557,891",
+"Production": "Warner Bros. Pictures",
+"Website": "http://movies.warnerbros.com/awards/harry.html",
+"Response": "True"
+}
 
-Netflix template
+COMMENTI
 
-Scarica il netflix-clone da qui --> LINK
+Hai un endpoint CRUD per commenti su:
 
-⚠️ ATTENZIONE⚠️
+https://striveschool-api.herokuapp.com/api/comments/
 
-Per favore ricordati di controllare la struttura della risposta che ottieni da OMDB!Ad es. l'array contenente gli oggetti dei film è il valore della proprietà chiamata Search, non la risposta stessa (che è un'oggetto!).
+Questo significa che puoi fare il GET, DELETE, POST, PUT dei dati da lì.
+
+❗❗❗ IMPORTANT ❗❗❗Dovrai usare gli headers di autenticazione (Authentication headers)(prendi un nuovo token su https://strive.school/studentlogin se il precedente è scaduto)
+
+Il commento è strutturato ad oggetto in questa maniera:
+
+{
+"comment": string
+"rate": string,
+"elementId": string
+}
+
+Dove:
+
+comment è il testo del commento inserito dall'utenterate è il valore tra 1 e 5elementId è l'imdbID del film
+
+Esempio:
+
+{
+"comment": "A good movie but definitely I don't like many parts of the plot"
+"rate": "3",
+"elementId": "tt0076759"
+}
+
+⚠️ WARNING ⚠️
+
+Fare una GET su https://striveschool-api.herokuapp.com/api/comments/ ti ritornerà TUTTI i commenti a database. Probabilmente a te interesserà principalmente ricevere i commenti di un singolo film alla volta: per fare ciò dovrai specificare l'imdbID del film nella tua URL:https://striveschool-api.herokuapp.com/api/comments/:elementId
+
+Esempio:
+
+https://striveschool-api.herokuapp.com/api/comments/tt0076759 troverà i commenti di un singolo film.

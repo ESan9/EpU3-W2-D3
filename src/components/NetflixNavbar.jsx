@@ -1,5 +1,6 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { BsSearch, BsBell, BsPersonCircle } from "react-icons/bs";
+import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 const NetflixNavbar = () => {
@@ -10,7 +11,7 @@ const NetflixNavbar = () => {
       style={{ backgroundColor: "#141414", borderRadius: "6px" }}
     >
       <Container fluid className="px-4">
-        <Navbar.Brand href="#">
+        <Navbar.Brand as={Link} to="/">
           <img
             src={logo}
             alt="Netflix Logo"
@@ -21,19 +22,19 @@ const NetflixNavbar = () => {
         <Navbar.Toggle aria-controls="navbarSupportedContent" />
         <Navbar.Collapse id="navbarSupportedContent">
           <Nav className="me-auto mb-2 mb-lg-0">
-            <Nav.Link href="#" className="fw-bold active">
+            <Nav.Link as={Link} to="/" className="fw-bold active">
               Home
             </Nav.Link>
-            <Nav.Link href="#" className="fw-bold">
+            <Nav.Link as={Link} to="/tv-shows" className="fw-bold">
               TV Shows
             </Nav.Link>
-            <Nav.Link href="#" className="fw-bold">
+            <Nav.Link as={Link} to="/movies" className="fw-bold">
               Movies
             </Nav.Link>
-            <Nav.Link href="#" className="fw-bold">
+            <Nav.Link as={Link} to="/recently-added" className="fw-bold">
               Recently Added
             </Nav.Link>
-            <Nav.Link href="#" className="fw-bold">
+            <Nav.Link as={Link} to="/my-list" className="fw-bold">
               My List
             </Nav.Link>
           </Nav>
