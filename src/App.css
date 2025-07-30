@@ -1,0 +1,17 @@
+.footer-links p {
+  margin-bottom: 0.4rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #999;
+}
+
+.footer-links a:hover {
+  text-decoration: none;
+  color: #ccc;
+}
+
+#root {
+  background-color: #141414;
+}
